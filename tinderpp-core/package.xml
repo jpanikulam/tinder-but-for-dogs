@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package>
+  <name>tinderpp-core</name>
+  <version>1.0.0</version>
+  <description>The tinderpp-core package</description>
+  <maintainer email="jpanikulam@ufl.edu">Jacob</maintainer>
+  <maintainer email="tessbianchi@ufl.edu">Tess</maintainer>
+  <license>MIT</license>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rospy</build_depend>
+  <run_depend>rospy</run_depend>
+  <export>
+  </export>
+</package>
