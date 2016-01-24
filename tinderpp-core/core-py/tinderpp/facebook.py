@@ -2,13 +2,13 @@ class FB(object):
     def __init__(self):
         self.people_interests = {
             'tess_bianchi': [
-                "The Weeknd",
-                "The Weekend",
+                "The Weeknd (Artist)",
+                "The Weekend (Concept)",
                 "Computer Science",
             ],
             'jacob_panikulam': [
-                "Ocean's 11",
-                "Taylor Swift",
+                "Ocean's 11 (Movie)",
+                "Taylor Swift (Artist)",
             ],
             'ian_van_stralen': [
                 "Barbecue",

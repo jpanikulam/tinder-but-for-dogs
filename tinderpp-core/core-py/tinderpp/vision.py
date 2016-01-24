@@ -1,3 +1,4 @@
+from collections import deque
 import numpy as np
 import cv2
 import os
@@ -24,6 +25,7 @@ class ImageScanner(object):
         self.last_bpm = 61.2
         self.face_detector = self.make_face_detector()
         self.smile_detector = Detector('smile')
+        self.heartbeat_deque = deque()
         self.likeness = 0
 
     def make_face_detector(self):
@@ -40,6 +42,12 @@ class ImageScanner(object):
     def downsample(self, image):
         img = cv2.resize(image, (image.shape[1] / 2, image.shape[0] / 2), interpolation=cv2.INTER_CUBIC)
         return img
+
+    def detect_face(self, img):
+        detections = self.face_detector.detect(img)
+        for i, bounding_box in enumerate(detections):
+            x0, y0, x1, y1 = bounding_box
+            return x0, y0, x1, y1
 
     def recognize_face(self, img):
         # TODO: Accumulate/make probabilistic
@@ -84,6 +92,12 @@ class ImageScanner(object):
         else:
             bpm = 61.2 + np.random.normal(3.0)
 
-        self.likeness += (bpm - 60.0) * self._heartbeat_weight
+        if len(self.heartbeat_deque) > 15:
+            self.heartbeat_deque.popleft()
+        self.heartbeat_deque.append(bpm)
 
-        return bpm
+        average = np.average(self.heartbeat_deque)
+
+        self.likeness += (average - 60.0) * self._heartbeat_weight
+
+        return average
