@@ -1,4 +1,4 @@
-# tinder-
+# tinder-but-for-dogs
 Like Tinder, but completely unrelated.
 
 
